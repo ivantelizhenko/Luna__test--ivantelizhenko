@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import Footer from './components/Footer';
 import Main from './components/Main';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ function App() {
     <Layout>
       <Main />
       <Footer />
+      <Toaster />
     </Layout>
   );
 }

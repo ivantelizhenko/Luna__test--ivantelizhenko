@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BookForm from './BookForm';
+import BookForm from './BookForm/BookForm';
 
 const StyledMain = styled.main`
   background-color: #d4a373;
