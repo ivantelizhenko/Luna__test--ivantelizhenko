@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 
 import InputField from './InputField';
 import SelectField from './SelectField';
-import { BookFormRow } from './BookFornRow';
+import BookFormRow from './BookFornRow';
 import Button from '../Button';
 import { useBooks } from '../../store/BookContext';
 

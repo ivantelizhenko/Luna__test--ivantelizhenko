@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BookFormRow = styled.div`
+const BookFormRow = styled.div`
   display: flex;
 
   & label {
@@ -18,3 +18,5 @@ export const BookFormRow = styled.div`
     box-shadow: 0 2px 4px rgba(0 0 0 / 0.1);
   }
 `;
+
+export default BookFormRow;
