@@ -16,8 +16,12 @@ type ButtonProps = {
   type?: 'submit' | 'reset' | 'button';
 };
 
-function Button({ children, type = 'button' }: ButtonProps) {
-  return <StyledButton type={type}>{children}</StyledButton>;
+function Button({ children, type = 'button', onClick }: ButtonProps) {
+  return (
+    <StyledButton type={type} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 }
 
 export default Button;

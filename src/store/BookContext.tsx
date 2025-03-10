@@ -11,6 +11,7 @@ const BooksContext = createContext<BooksContextValue | null>(null);
 
 const initialState: AppState = {
   books: [],
+  page: 'dashboard',
 };
 
 function booksReducer(state: AppState, action: Action): AppState {
@@ -25,6 +26,7 @@ function booksReducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         books: [...state.books, action.payload],
+        page: 'dashboard',
       };
     }
     case 'book/remove': {
@@ -32,6 +34,13 @@ function booksReducer(state: AppState, action: Action): AppState {
         ...state,
         books: [...state.books.filter(book => book.isbn !== action.payload)],
       };
+    }
+
+    case 'page/toDashboard': {
+      return { ...state, page: 'dashboard' };
+    }
+    case 'page/toForm': {
+      return { ...state, page: 'form' };
     }
 
     default:
@@ -67,6 +76,12 @@ function BooksProvider({ children }: BooksContextProviderProps) {
     },
     removeBook(isbn) {
       dispatch({ type: 'book/remove', payload: isbn });
+    },
+    toDashboard() {
+      dispatch({ type: 'page/toDashboard' });
+    },
+    toForm() {
+      dispatch({ type: 'page/toForm' });
     },
   };
 

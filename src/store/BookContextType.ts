@@ -12,11 +12,14 @@ export interface Book {
 
 export type AppState = {
   books: Book[];
+  page: 'dashboard' | 'form';
 };
 
 export type BooksContextValue = AppState & {
   addBook: (newBook: Book) => void;
   removeBook: (isbn: number) => void;
+  toDashboard: () => void;
+  toForm: () => void;
 };
 
 export type BooksContextProviderProps = {
@@ -38,4 +41,16 @@ type removeBookAction = {
   payload: number;
 };
 
-export type Action = isBooksLoadedAction | addBookAction | removeBookAction;
+type toDashboardAction = {
+  type: 'page/toDashboard';
+};
+type toFormAction = {
+  type: 'page/toForm';
+};
+
+export type Action =
+  | isBooksLoadedAction
+  | addBookAction
+  | removeBookAction
+  | toDashboardAction
+  | toFormAction;

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import BookForm from './BookForm/BookForm';
-import { BooksProvider } from '../store/BookContext';
+
 import Dashboard from './Dashboard';
+import { useBooks } from '../store/BookContext';
 
 const StyledMain = styled.main`
   background-color: #d4a373;
@@ -10,13 +11,12 @@ const StyledMain = styled.main`
 `;
 
 function Main() {
+  const { page } = useBooks();
   return (
-    <BooksProvider>
-      <StyledMain>
-        <BookForm />
-        {/* <Dashboard /> */}
-      </StyledMain>
-    </BooksProvider>
+    <StyledMain>
+      {page === 'form' && <BookForm />}
+      {page === 'dashboard' && <Dashboard />}
+    </StyledMain>
   );
 }
 

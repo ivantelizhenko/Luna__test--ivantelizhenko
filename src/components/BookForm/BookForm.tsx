@@ -37,7 +37,7 @@ type DataBookFields = {
 };
 
 function BookForm() {
-  const { addBook } = useBooks();
+  const { addBook, toDashboard } = useBooks();
   const [formData, setFormData] = useState<DataBookFields>({
     title: '',
     author: '',
@@ -63,7 +63,7 @@ function BookForm() {
       id: Math.random().toString(),
     };
     addBook(newBook);
-
+    toDashboard();
     setFormData({
       title: '',
       author: '',
@@ -111,7 +111,7 @@ function BookForm() {
       </BookFormRow>
 
       <BookFormRow>
-        <Button>&larr; Dashboard</Button>
+        <Button onClick={toDashboard}>&larr; Dashboard</Button>
         <Button type="submit">Add book</Button>
       </BookFormRow>
     </StyledBookForm>
