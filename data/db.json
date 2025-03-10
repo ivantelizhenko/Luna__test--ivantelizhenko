@@ -5,56 +5,56 @@
       "id": "0.9094487153242294 ",
       "author": "Suzanne Collins",
       "category": "Fiction",
-      "isbn": "9780439023528"
+      "isbn": 9780439023528,
+      "createdAt": "9 February 2025, 5:10pm"
     },
     {
       "title": "How to Keep House While Drowning",
       "id": "0.03166648222405832 ",
       "author": "Kenneth Culp Davis",
       "category": "Non-Fiction",
-      "isbn": "9781668002858"
+      "isbn": 9781668002858,
+      "createdAt": "8 March 2025, 5:10pm"
     },
     {
       "title": "A Brief History of Time",
       "id": "0.7915088334716723",
       "author": "Stephen Hawking",
       "category": "Science",
-      "isbn": "9780553380163"
+      "isbn": 9780553380163,
+      "createdAt": "10 March 2025, 5:10pm"
     },
     {
       "title": "Be Useful: Seven Tools for Life",
       "id": "0.4662420525459894",
       "author": "Arnold Schwarzenegger",
       "category": "Non-Fiction",
-      "isbn": "9780593655955"
+      "isbn": 9780593655955,
+      "createdAt": "10 March 2025, 5:10pm"
     },
     {
       "title": "The Selfish Gene",
       "id": "0.3325417005857263",
       "author": "Richard Dawkins",
       "category": "Science",
-      "isbn": 9780199291151
+      "isbn": 9780199291151,
+      "createdAt": "9 March 2019, 5:10pm"
     },
     {
       "title": "1984",
       "id": "0.5551426774956252",
       "author": "Dzhordzh Orvell",
       "category": "Fiction",
-      "isbn": 97801992564783
+      "isbn": 97801992564783,
+      "createdAt": "8 May 2024, 5:10am"
     },
     {
-      "id": "0.7775642570466622",
-      "title": "asd",
-      "author": "ssss",
-      "category": "Fiction",
-      "isbn": 23233
-    },
-    {
-      "id": "0.16950163413915587",
+      "id": "0.025823217705060797",
       "title": "test",
       "author": "test",
-      "category": "Fiction",
-      "isbn": 2222222
+      "category": "Non-Fiction",
+      "isbn": 3333333,
+      "createdAt": "10 March 2025, 5:37pm"
     }
   ]
 }

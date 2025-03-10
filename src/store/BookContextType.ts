@@ -4,6 +4,8 @@ export interface Book {
   title: string;
   author: string;
   category: 'Fiction' | 'Non-Fiction' | 'Science';
+  createdAt: string;
+  modifiedAt?: string;
   isbn: number;
   id: string;
 }

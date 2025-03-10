@@ -13,8 +13,8 @@ function Main() {
   return (
     <BooksProvider>
       <StyledMain>
-        {/* <BookForm /> */}
-        <Dashboard />
+        <BookForm />
+        {/* <Dashboard /> */}
       </StyledMain>
     </BooksProvider>
   );

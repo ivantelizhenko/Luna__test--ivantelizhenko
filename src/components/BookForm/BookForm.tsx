@@ -1,11 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
+import { format } from 'date-fns';
 
 import InputField from './InputField';
 import SelectField from './SelectField';
 import { BookFormRow } from './BookFornRow';
 import Button from '../Button';
-import toast from 'react-hot-toast';
 import { useBooks } from '../../store/BookContext';
 
 const StyledBookForm = styled.form`
@@ -54,11 +55,14 @@ function BookForm() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    addBook({
+    const time = format(new Date(), 'dd MMMM y, h:mmaaa');
+    const newBook = {
       ...formData,
       isbn: +formData.isbn,
+      createdAt: time,
       id: Math.random().toString(),
-    });
+    };
+    addBook(newBook);
 
     setFormData({
       title: '',

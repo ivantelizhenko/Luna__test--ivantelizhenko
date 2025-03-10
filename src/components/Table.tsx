@@ -56,8 +56,8 @@ function Table() {
               <td>{author}</td>
               <td>{category}</td>
               <td>{isbn}</td>
-              <td>today</td>
-              <td>today</td>
+              <td>{createdAt}</td>
+              <td>{modifiedAt || '-'}</td>
               <ActionContainer>
                 <TableButton>Edit</TableButton>
                 <TableButton>Delete</TableButton>
