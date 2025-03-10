@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BookForm from './BookForm/BookForm';
 import { BooksProvider } from '../store/BookContext';
+import Dashboard from './Dashboard';
 
 const StyledMain = styled.main`
   background-color: #d4a373;
@@ -12,7 +13,8 @@ function Main() {
   return (
     <BooksProvider>
       <StyledMain>
-        <BookForm />
+        {/* <BookForm /> */}
+        <Dashboard />
       </StyledMain>
     </BooksProvider>
   );
