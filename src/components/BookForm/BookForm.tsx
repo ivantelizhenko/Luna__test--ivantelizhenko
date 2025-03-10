@@ -6,6 +6,7 @@ import SelectField from './SelectField';
 import { BookFormRow } from './BookFornRow';
 import Button from '../Button';
 import toast from 'react-hot-toast';
+import { Book } from '../../contexts/AppContextType';
 
 const StyledBookForm = styled.form`
   & div:not(:last-of-type) {
@@ -26,13 +27,6 @@ const StyledBookForm = styled.form`
     width: 100%;
   }
 `;
-
-interface Book {
-  title: string;
-  author: string;
-  category: 'Fiction' | 'Non-Fiction' | 'Science';
-  isbn: string;
-}
 
 function BookForm() {
   const [formData, setFormData] = useState<Book>({
