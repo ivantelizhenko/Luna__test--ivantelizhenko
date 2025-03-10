@@ -1,8 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
 body {
   line-height: calc(1em + 0.5rem);
 
-  -webkit-font-smoothing: antialiased;
   font-size: 1.6rem;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  color: #333;
+  height: 100%;
+
+  -webkit-font-smoothing: antialiased;
 }
 
 img,
@@ -19,6 +37,15 @@ button,
 textarea,
 select {
   font: inherit;
+  color: inherit;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid;
+  outline-offset: -1px;
 }
 
 p,
@@ -64,4 +91,5 @@ ul {
 #root,
 #__next {
   isolation: isolate;
+  height: 100%;
 }
