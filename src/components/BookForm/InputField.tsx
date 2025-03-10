@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react';
 type InputFieldProps = {
   name: string;
   title: string;
-  value: string;
+  value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
 };

@@ -6,7 +6,7 @@ import SelectField from './SelectField';
 import { BookFormRow } from './BookFornRow';
 import Button from '../Button';
 import toast from 'react-hot-toast';
-import { Book } from '../../store/BookContextType';
+import { useBooks } from '../../store/BookContext';
 
 const StyledBookForm = styled.form`
   & div:not(:last-of-type) {
@@ -28,8 +28,16 @@ const StyledBookForm = styled.form`
   }
 `;
 
+type DataBookFields = {
+  title: string;
+  author: string;
+  category: 'Fiction' | 'Non-Fiction' | 'Science';
+  isbn: '';
+};
+
 function BookForm() {
-  const [formData, setFormData] = useState<Book>({
+  const { addBook } = useBooks();
+  const [formData, setFormData] = useState<DataBookFields>({
     title: '',
     author: '',
     category: 'Fiction',
@@ -44,12 +52,20 @@ function BookForm() {
     }));
   }
 
-  // Обробник відправки форми
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log(formData);
+    addBook({
+      ...formData,
+      isbn: +formData.isbn,
+      id: Math.random().toString(),
+    });
 
-    setFormData({ title: '', author: '', category: 'Fiction', isbn: '' });
+    setFormData({
+      title: '',
+      author: '',
+      category: 'Fiction',
+      isbn: '',
+    });
     toast.success('Book was added!');
   }
 
@@ -92,7 +108,7 @@ function BookForm() {
 
       <BookFormRow>
         <Button>&larr; Dashboard</Button>
-        <Button type="submit">Додати книгу</Button>
+        <Button type="submit">Add book</Button>
       </BookFormRow>
     </StyledBookForm>
   );

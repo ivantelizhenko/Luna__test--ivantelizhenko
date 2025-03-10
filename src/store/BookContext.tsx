@@ -5,7 +5,7 @@ import {
   AppState,
   BooksContextProviderProps,
 } from './BookContextType';
-import { getBooks } from '../services/getBooks';
+import { addBook as addBookApi, getBooks } from '../services/booksAPI';
 
 const BooksContext = createContext<BooksContextValue | null>(null);
 
@@ -46,7 +46,7 @@ function BooksProvider({ children }: BooksContextProviderProps) {
     async function get() {
       try {
         const books = await getBooks();
-        console.log(books);
+
         dispatch({ type: 'books/loaded', payload: books });
       } catch (err) {
         console.error(err);
@@ -60,6 +60,10 @@ function BooksProvider({ children }: BooksContextProviderProps) {
     ...booksState,
     addBook(newBook) {
       dispatch({ type: 'book/add', payload: newBook });
+      async function add() {
+        await addBookApi(newBook);
+      }
+      add();
     },
     removeBook(isbn) {
       dispatch({ type: 'book/remove', payload: isbn });
@@ -74,7 +78,6 @@ function useBooks() {
   if (context === undefined)
     throw new Error('BooksContext was used outside of the BooksProvider');
 
-  console.log('i work');
   return context as BooksContextValue;
 }
 

@@ -2,39 +2,59 @@
   "books": [
     {
       "title": "The Hunger Games",
+      "id": "0.9094487153242294 ",
       "author": "Suzanne Collins",
       "category": "Fiction",
       "isbn": "9780439023528"
     },
     {
       "title": "How to Keep House While Drowning",
+      "id": "0.03166648222405832 ",
       "author": "Kenneth Culp Davis",
       "category": "Non-Fiction",
       "isbn": "9781668002858"
     },
     {
       "title": "A Brief History of Time",
+      "id": "0.7915088334716723",
       "author": "Stephen Hawking",
       "category": "Science",
       "isbn": "9780553380163"
     },
     {
       "title": "Be Useful: Seven Tools for Life",
+      "id": "0.4662420525459894",
       "author": "Arnold Schwarzenegger",
       "category": "Non-Fiction",
       "isbn": "9780593655955"
     },
     {
       "title": "The Selfish Gene",
+      "id": "0.3325417005857263",
       "author": "Richard Dawkins",
       "category": "Science",
-      "isbn": "9780199291151"
+      "isbn": 9780199291151
     },
     {
       "title": "1984",
+      "id": "0.5551426774956252",
       "author": "Dzhordzh Orvell",
       "category": "Fiction",
-      "isbn": "0452284236"
+      "isbn": 97801992564783
+    },
+    {
+      "id": "0.7775642570466622",
+      "title": "asd",
+      "author": "ssss",
+      "category": "Fiction",
+      "isbn": 23233
+    },
+    {
+      "id": "0.16950163413915587",
+      "title": "test",
+      "author": "test",
+      "category": "Fiction",
+      "isbn": 2222222
     }
   ]
 }

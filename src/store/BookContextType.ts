@@ -4,7 +4,8 @@ export interface Book {
   title: string;
   author: string;
   category: 'Fiction' | 'Non-Fiction' | 'Science';
-  isbn: string;
+  isbn: number;
+  id: string;
 }
 
 export type AppState = {
@@ -13,7 +14,7 @@ export type AppState = {
 
 export type BooksContextValue = AppState & {
   addBook: (newBook: Book) => void;
-  removeBook: (isbn: string) => void;
+  removeBook: (isbn: number) => void;
 };
 
 export type BooksContextProviderProps = {
@@ -32,7 +33,7 @@ type addBookAction = {
 
 type removeBookAction = {
   type: 'book/remove';
-  payload: string;
+  payload: number;
 };
 
 export type Action = isBooksLoadedAction | addBookAction | removeBookAction;
