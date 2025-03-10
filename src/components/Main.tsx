@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import BookForm from './BookForm/BookForm';
-import { BooksProvider } from '../contexts/AppContext';
+import { BooksProvider } from '../store/BookContext';
 
 const StyledMain = styled.main`
   background-color: #d4a373;

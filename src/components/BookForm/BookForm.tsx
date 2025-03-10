@@ -6,7 +6,7 @@ import SelectField from './SelectField';
 import { BookFormRow } from './BookFornRow';
 import Button from '../Button';
 import toast from 'react-hot-toast';
-import { Book } from '../../contexts/AppContextType';
+import { Book } from '../../store/BookContextType';
 
 const StyledBookForm = styled.form`
   & div:not(:last-of-type) {

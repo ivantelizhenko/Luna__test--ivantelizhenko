@@ -8,21 +8,16 @@ export interface Book {
 }
 
 export type AppState = {
-  isLoading: boolean;
   books: Book[];
 };
 
-export type AppContextValue = AppState & {
+export type BooksContextValue = AppState & {
   addBook: (newBook: Book) => void;
   removeBook: (isbn: string) => void;
 };
 
 export type BooksContextProviderProps = {
   children: ReactNode;
-};
-
-type isLoadingAction = {
-  type: 'loading';
 };
 
 type isBooksLoadedAction = {
@@ -40,8 +35,4 @@ type removeBookAction = {
   payload: string;
 };
 
-export type Action =
-  | isLoadingAction
-  | isBooksLoadedAction
-  | addBookAction
-  | removeBookAction;
+export type Action = isBooksLoadedAction | addBookAction | removeBookAction;

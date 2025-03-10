@@ -1,44 +1,35 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import {
   Action,
-  AppContextValue,
+  BooksContextValue,
   AppState,
   BooksContextProviderProps,
-} from './AppContextType';
+} from './BookContextType';
+import { getBooks } from '../services/getBooks';
 
-const BooksContext = createContext<AppContextValue | null>(null);
+const BooksContext = createContext<BooksContextValue | null>(null);
 
 const initialState: AppState = {
-  isLoading: false,
   books: [],
 };
 
 function booksReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case 'loading': {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    }
     case 'books/loaded': {
       return {
         ...state,
-        isLoading: false,
         books: action.payload,
       };
     }
     case 'book/add': {
       return {
         ...state,
-        isLoading: false,
         books: [...state.books, action.payload],
       };
     }
     case 'book/remove': {
       return {
         ...state,
-        isLoading: false,
         books: [...state.books.filter(book => book.isbn !== action.payload)],
       };
     }
@@ -51,7 +42,21 @@ function booksReducer(state: AppState, action: Action): AppState {
 function BooksProvider({ children }: BooksContextProviderProps) {
   const [booksState, dispatch] = useReducer(booksReducer, initialState);
 
-  const ctx: AppContextValue = {
+  useEffect(() => {
+    async function get() {
+      try {
+        const books = await getBooks();
+        console.log(books);
+        dispatch({ type: 'books/loaded', payload: books });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    get();
+  }, []);
+
+  const ctx: BooksContextValue = {
     ...booksState,
     addBook(newBook) {
       dispatch({ type: 'book/add', payload: newBook });
@@ -66,11 +71,11 @@ function BooksProvider({ children }: BooksContextProviderProps) {
 
 function useBooks() {
   const context = useContext(BooksContext);
-
   if (context === undefined)
     throw new Error('BooksContext was used outside of the BooksProvider');
 
-  return context as AppContextValue;
+  console.log('i work');
+  return context as BooksContextValue;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
