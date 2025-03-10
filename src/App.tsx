@@ -3,19 +3,18 @@ import styled from 'styled-components';
 import Footer from './components/Footer';
 import Main from './components/Main';
 
-const Wrapper = styled.div`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: pink;
   height: 100%;
 `;
 
 function App() {
   return (
-    <Wrapper>
+    <Layout>
       <Main />
       <Footer />
-    </Wrapper>
+    </Layout>
   );
 }
 

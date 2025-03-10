@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import BookForm from './BookForm';
 
 const StyledMain = styled.main`
-  background-color: yellow;
+  background-color: #d4a373;
   padding: 4.8rem 6.4rem;
-
   height: 100%;
 `;
 
