@@ -1,31 +1,21 @@
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { usePage } from '../../store/PageContext/PageContext';
 import { useForm } from '../../store/FormContext/FormContext';
 
+import { FilterValues } from './DashboardTypes';
+
 import Table from './Table';
 import SelectField from '../SelectField';
-import { ChangeEvent, useState } from 'react';
-import { FilterValues } from './DashboardTypes';
+import Navigation from './Navigation';
+import Filter from './Filter';
+import AddEditBookButton from '../AddEditBookButton';
 
 const StyledDashboard = styled.div`
   background-color: #fefae0;
-  padding: 2.4rem 4.8rem;
+  padding: 1.2rem 2.4rem;
   border-radius: 4px;
-  height: 100%;
-  overflow: auto;
-`;
-
-const AddBookButton = styled.button`
-  height: 6.4rem;
-  width: 6.4rem;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0 0 0 / 0.2);
-  background-color: #0267c1;
-  color: #fff;
-  position: fixed;
-  right: 0;
-  top: 5%;
+  height: fit-content;
 `;
 
 function Dashboard() {
@@ -46,14 +36,18 @@ function Dashboard() {
 
   return (
     <StyledDashboard>
-      <SelectField
-        title="Filter"
-        name="filter"
-        value={filterValue}
-        onChange={handleSetFilter}
-        options={['all', 'active', 'deactivated']}
-      />
-      <AddBookButton onClick={handleToForm}>Add book</AddBookButton>
+      <Navigation>
+        <Filter>
+          <SelectField
+            title="Books"
+            name="filter"
+            value={filterValue}
+            onChange={handleSetFilter}
+            options={['all', 'active', 'deactivated']}
+          />
+        </Filter>
+        <AddEditBookButton onClick={handleToForm}>Add book</AddEditBookButton>
+      </Navigation>
       <Table filter={filterValue} />
     </StyledDashboard>
   );

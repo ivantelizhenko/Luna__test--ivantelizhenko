@@ -31,23 +31,13 @@
       "modifiedAt": "11 March 2025, 10:41am"
     },
     {
-      "title": "Be Useful: Seven Tools for Life 2",
-      "id": "0.4662420525459894",
-      "author": "Arnold Schwarzenegger",
-      "category": "Non-Fiction",
-      "isbn": 9780593655955,
-      "createdAt": "10 March 2025, 5:10pm",
-      "status": "deactivated",
-      "modifiedAt": "11 March 2025, 10:49am"
-    },
-    {
       "title": "The Selfish Gene",
       "id": "0.3325417005857263",
       "author": "Richard Dawkins",
       "category": "Science",
       "isbn": 9780199291151,
       "createdAt": "9 March 2019, 5:10pm",
-      "status": "deactivated"
+      "status": "active"
     },
     {
       "title": "1984",
@@ -56,7 +46,16 @@
       "category": "Fiction",
       "isbn": 97801992564783,
       "createdAt": "8 May 2024, 5:10am",
-      "status": "deactivated"
+      "status": "active"
+    },
+    {
+      "id": "0.9788661808044541",
+      "title": "test",
+      "author": "test",
+      "category": "Science",
+      "isbn": 222222,
+      "createdAt": "11 March 2025, 1:30pm",
+      "status": "active"
     }
   ]
 }

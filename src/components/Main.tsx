@@ -8,7 +8,7 @@ import { FormProvider } from '../store/FormContext/FormContext';
 
 const StyledMain = styled.main`
   background-color: #d4a373;
-  padding: 4.8rem 6.4rem;
+  padding: 2.4rem 3.6rem;
   height: 100%;
 `;
 

@@ -1,57 +1,65 @@
 import styled from 'styled-components';
 import { useBooks } from '../../store/BookContext/BooksContext';
 import { Book, BookStatus } from '../../store/BookContext/BooksContextType';
-import { toggleBookStatus as toggleBookStatusHelper } from '../../utils/helpers';
+import {
+  filterToBookStatusMap,
+  toggleBookStatus as toggleBookStatusHelper,
+} from '../../utils/helpers';
 import { usePage } from '../../store/PageContext/PageContext';
 import { useForm } from '../../store/FormContext/FormContext';
 import { FilterValues } from './DashboardTypes';
 
-const StyledTable = styled.table<{ centering?: boolean }>`
+const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
+  overflow: auto;
 
-  & thead {
-    position: sticky;
-    top: -2.4rem;
+  th,
+  td {
+    border: 1px solid gray;
+    padding: 4px 8px;
   }
 
-  & th,
-  & td {
-    border: 1px solid #ddd;
-    padding: 8px;
+  th {
+    background-color: #d3ebff;
+  }
+
+  tr,
+  td {
     text-align: left;
-  }
-
-  & th {
-    background-color: #f2f2f2;
-    font-weight: bold;
   }
 `;
 
 const ActionContainer = styled.td`
   display: flex;
-  gap: 1.2rem;
+  gap: 8px;
+  border-collapse: collapse;
 `;
 
 const TableButton = styled.button`
-  padding: 8px 12px;
+  background-color: #0267c1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
   white-space: nowrap;
 
   &:last-of-type {
     width: 100%;
   }
+
+  &:hover {
+    background-color: #004a8a;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 `;
 
-type TableProps = {
-  filter: FilterValues;
-};
-
-const filterToBookStatusMap = {
-  [FilterValues.ShowActive]: BookStatus.Active,
-  [FilterValues.ShowDeactive]: BookStatus.Deactivated,
-};
-
-function Table({ filter }: TableProps) {
+function Table({ filter }: { filter: FilterValues }) {
   const { books, toggleBookStatus, removeBook, setEditingBook } = useBooks();
   const { setPageFormStatus } = usePage();
   const { setFormEditStatus } = useForm();
@@ -129,31 +137,3 @@ function Table({ filter }: TableProps) {
 }
 
 export default Table;
-
-// Book title;
-// Author name;
-// Category;
-// ISBN;
-// Created At (datetime format should follow pattern: 12 March 2022, 8:35AM)
-// Modified/Edited At
-
-{
-  /* <table style={style.table} className='informationTable'>
-      <thead> 
-        <tr>
-          <th style={style.tableCell}>First name</th>
-          <th style={style.tableCell}>Last name</th>
-          <th style={style.tableCell}>Phone</th>
-        </tr>
-      </thead> 
-      <tbody style={style.tableBody}>
-      {sortedContacts.map((contact) => 
-        <tr key={contact.id}>
-          <td style={style.tableCell}>{contact.userFirstname}</td>
-          <td style={style.tableCell}>{contact.userLastname}</td>
-          <td style={style.tableCell}>{contact.userPhone}</td>
-        </tr>
-      )}
-      </tbody>
-    </table> */
-}
