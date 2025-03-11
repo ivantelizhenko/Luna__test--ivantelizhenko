@@ -20,7 +20,6 @@ const BooksContext = createContext<BooksContextValue | null>(null);
 
 const initialState: BookState = {
   books: [],
-  formStatus: 'add',
   editingBook: null,
 };
 
@@ -79,18 +78,6 @@ function booksReducer(state: BookState, action: Action): BookState {
         editingBook: null,
       };
     }
-    case 'form/addStatus': {
-      return {
-        ...state,
-        formStatus: 'add',
-      };
-    }
-    case 'form/editStatus': {
-      return {
-        ...state,
-        formStatus: 'edit',
-      };
-    }
     default:
       throw new Error('Unknown action type');
   }
@@ -136,12 +123,6 @@ function BooksProvider({ children }: BooksContextProviderProps) {
     },
     clearEditingBook() {
       dispatch({ type: 'editingBook/clear' });
-    },
-    setAddFormStatus() {
-      dispatch({ type: 'form/addStatus' });
-    },
-    setEditFormStatus() {
-      dispatch({ type: 'form/editStatus' });
     },
   };
 

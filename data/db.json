@@ -37,7 +37,7 @@
       "category": "Non-Fiction",
       "isbn": 9780593655955,
       "createdAt": "10 March 2025, 5:10pm",
-      "status": "active",
+      "status": "deactivated",
       "modifiedAt": "11 March 2025, 10:49am"
     },
     {
@@ -57,16 +57,6 @@
       "isbn": 97801992564783,
       "createdAt": "8 May 2024, 5:10am",
       "status": "deactivated"
-    },
-    {
-      "title": "test 2",
-      "author": "test",
-      "category": "Science",
-      "isbn": 222222,
-      "createdAt": "11 March 2025, 11:59am",
-      "status": "active",
-      "id": "0.6600203326829159",
-      "modifiedAt": "11 March 2025, 11:59am"
     }
   ]
 }

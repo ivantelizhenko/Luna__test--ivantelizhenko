@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import _ from 'lodash';
 
-import InputField from './InputField';
-import SelectField from './SelectField';
+import InputField from '../InputField';
+import SelectField from '../SelectField';
 import BookFormRow from './BookFornRow';
 import Button from '../Button';
 import { useBooks } from '../../store/BookContext/BooksContext';

@@ -4,6 +4,7 @@ import { Book, BookStatus } from '../../store/BookContext/BooksContextType';
 import { toggleBookStatus as toggleBookStatusHelper } from '../../utils/helpers';
 import { usePage } from '../../store/PageContext/PageContext';
 import { useForm } from '../../store/FormContext/FormContext';
+import { FilterValues } from './DashboardTypes';
 
 const StyledTable = styled.table<{ centering?: boolean }>`
   width: 100%;
@@ -41,10 +42,23 @@ const TableButton = styled.button`
   }
 `;
 
-function Table() {
+type TableProps = {
+  filter: FilterValues;
+};
+
+const filterToBookStatusMap = {
+  [FilterValues.ShowActive]: BookStatus.Active,
+  [FilterValues.ShowDeactive]: BookStatus.Deactivated,
+};
+
+function Table({ filter }: TableProps) {
   const { books, toggleBookStatus, removeBook, setEditingBook } = useBooks();
   const { setPageFormStatus } = usePage();
   const { setFormEditStatus } = useForm();
+  const filteredBooks =
+    filter === FilterValues.ShowAll
+      ? books
+      : books.filter(book => book.status === filterToBookStatusMap[filter]);
 
   function handleEditBook(id: string) {
     setEditingBook(id);
@@ -56,7 +70,7 @@ function Table() {
     removeBook(id);
   }
 
-  function handleToggleStatus(id: string, status: BookStatus) {
+  function handleToggleBookStatus(id: string, status: BookStatus) {
     toggleBookStatus(id, toggleBookStatusHelper(status));
   }
 
@@ -74,7 +88,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {(books as Book[]).map(
+        {(filteredBooks as Book[]).map(
           ({
             title,
             author,
@@ -102,7 +116,7 @@ function Table() {
                 >
                   Delete
                 </TableButton>
-                <TableButton onClick={() => handleToggleStatus(id, status)}>
+                <TableButton onClick={() => handleToggleBookStatus(id, status)}>
                   {status === BookStatus.Active ? 'Deactivate' : 'Re-Activate'}
                 </TableButton>
               </ActionContainer>

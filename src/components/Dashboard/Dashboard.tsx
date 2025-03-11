@@ -3,6 +3,9 @@ import { usePage } from '../../store/PageContext/PageContext';
 import { useForm } from '../../store/FormContext/FormContext';
 
 import Table from './Table';
+import SelectField from '../SelectField';
+import { ChangeEvent, useState } from 'react';
+import { FilterValues } from './DashboardTypes';
 
 const StyledDashboard = styled.div`
   background-color: #fefae0;
@@ -26,6 +29,9 @@ const AddBookButton = styled.button`
 `;
 
 function Dashboard() {
+  const [filterValue, setFilterValue] = useState<FilterValues>(
+    FilterValues.ShowAll
+  );
   const { setFormAddStatus } = useForm();
   const { setPageFormStatus } = usePage();
 
@@ -34,10 +40,21 @@ function Dashboard() {
     setPageFormStatus();
   }
 
+  function handleSetFilter(e: ChangeEvent<HTMLSelectElement>) {
+    setFilterValue(e.target.value as FilterValues);
+  }
+
   return (
     <StyledDashboard>
+      <SelectField
+        title="Filter"
+        name="filter"
+        value={filterValue}
+        onChange={handleSetFilter}
+        options={['all', 'active', 'deactivated']}
+      />
       <AddBookButton onClick={handleToForm}>Add book</AddBookButton>
-      <Table />
+      <Table filter={filterValue} />
     </StyledDashboard>
   );
 }
