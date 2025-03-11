@@ -24,11 +24,16 @@ const AddBookButton = styled.button`
 `;
 
 function Dashboard() {
-  const { toForm } = useBooks();
+  const { toForm, setAddFormStatus } = useBooks();
+
+  function handleToForm() {
+    setAddFormStatus();
+    toForm();
+  }
 
   return (
     <StyledDashboard>
-      <AddBookButton onClick={toForm}>Add book</AddBookButton>
+      <AddBookButton onClick={handleToForm}>Add book</AddBookButton>
       <Table />
     </StyledDashboard>
   );

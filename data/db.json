@@ -1,22 +1,24 @@
 {
   "books": [
     {
-      "title": "The Hunger Games",
+      "title": "The Hunger Games ",
       "id": "0.9094487153242294",
       "author": "Suzanne Collins",
       "category": "Fiction",
       "isbn": 9780439023528,
       "createdAt": "9 February 2025, 5:10pm",
-      "status": "active"
+      "status": "active",
+      "modifiedAt": "11 March 2025, 10:43am"
     },
     {
-      "title": "How to Keep House While Drowning",
+      "title": "How to Keep House While Drowning ",
       "id": "0.03166648222405832",
       "author": "Kenneth Culp Davis",
       "category": "Non-Fiction",
       "isbn": 9781668002858,
       "createdAt": "8 March 2025, 5:10pm",
-      "status": "active"
+      "status": "active",
+      "modifiedAt": "11 March 2025, 10:42am"
     },
     {
       "title": "A Brief History of Time",
@@ -25,16 +27,18 @@
       "category": "Science",
       "isbn": 9780553380163,
       "createdAt": "10 March 2025, 5:10pm",
-      "status": "active"
+      "status": "active",
+      "modifiedAt": "11 March 2025, 10:41am"
     },
     {
-      "title": "Be Useful: Seven Tools for Life",
+      "title": "Be Useful: Seven Tools for Life 2",
       "id": "0.4662420525459894",
       "author": "Arnold Schwarzenegger",
       "category": "Non-Fiction",
       "isbn": 9780593655955,
       "createdAt": "10 March 2025, 5:10pm",
-      "status": "active"
+      "status": "active",
+      "modifiedAt": "11 March 2025, 10:49am"
     },
     {
       "title": "The Selfish Gene",
@@ -52,15 +56,6 @@
       "category": "Fiction",
       "isbn": 97801992564783,
       "createdAt": "8 May 2024, 5:10am",
-      "status": "deactivated"
-    },
-    {
-      "id": "0.740400081187306",
-      "title": "test",
-      "author": "test",
-      "category": "Non-Fiction",
-      "isbn": 123,
-      "createdAt": "10 March 2025, 5:51pm",
       "status": "deactivated"
     }
   ]

@@ -40,7 +40,20 @@ const TableButton = styled.button`
 `;
 
 function Table() {
-  const { books, toggleBookStatus, removeBook } = useBooks();
+  const {
+    books,
+    toggleBookStatus,
+    removeBook,
+    setEditingBook,
+    setEditFormStatus,
+    toForm,
+  } = useBooks();
+
+  function handleEditBook(id: string) {
+    setEditingBook(id);
+    setEditFormStatus();
+    toForm();
+  }
 
   function handleDeleteBook(id: string) {
     removeBook(id);
@@ -83,7 +96,9 @@ function Table() {
               <td>{createdAt}</td>
               <td>{modifiedAt || '-'}</td>
               <ActionContainer>
-                <TableButton>Edit</TableButton>
+                <TableButton onClick={() => handleEditBook(id)}>
+                  Edit
+                </TableButton>
                 <TableButton
                   onClick={() => handleDeleteBook(id)}
                   disabled={status === BookStatus.Active}

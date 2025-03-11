@@ -10,6 +10,7 @@ import {
   addBook as addBookApi,
   deleteBook,
   getBooks,
+  updateBook,
   updateBookStatus,
 } from '../services/booksAPI';
 import { toggleBookStatus as toggleBookStatusHelper } from '../utils/helpers';
@@ -19,6 +20,8 @@ const BooksContext = createContext<BooksContextValue | null>(null);
 const initialState: AppState = {
   books: [],
   page: 'dashboard',
+  formStatus: 'add',
+  editingBook: null,
 };
 
 function booksReducer(state: AppState, action: Action): AppState {
@@ -42,6 +45,15 @@ function booksReducer(state: AppState, action: Action): AppState {
         books: [...state.books.filter(book => book.id !== action.payload)],
       };
     }
+    case 'book/edit': {
+      const editedBooks: Book[] = state.books.map(book =>
+        book.id === action.payload.id ? action.payload : book
+      );
+      return {
+        ...state,
+        books: editedBooks,
+      };
+    }
     case 'book/toggleStatus': {
       const editedBooks: Book[] = state.books.map(book =>
         book.id === action.payload
@@ -54,6 +66,30 @@ function booksReducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         books: editedBooks,
+      };
+    }
+    case 'editingBook/set': {
+      return {
+        ...state,
+        editingBook: state.books.find(book => book.id === action.payload)!,
+      };
+    }
+    case 'editingBook/clear': {
+      return {
+        ...state,
+        editingBook: null,
+      };
+    }
+    case 'form/addStatus': {
+      return {
+        ...state,
+        formStatus: 'add',
+      };
+    }
+    case 'form/editStatus': {
+      return {
+        ...state,
+        formStatus: 'edit',
       };
     }
 
@@ -96,11 +132,26 @@ function BooksProvider({ children }: BooksContextProviderProps) {
       dispatch({ type: 'book/remove', payload: id });
       await deleteBook(id);
     },
+    async editBook(editedBook) {
+      dispatch({ type: 'book/edit', payload: editedBook });
+      await updateBook(editedBook.id, editedBook);
+    },
     async toggleBookStatus(id, newStatus) {
       dispatch({ type: 'book/toggleStatus', payload: id });
       await updateBookStatus(id, newStatus);
     },
-
+    setEditingBook(id: string) {
+      dispatch({ type: 'editingBook/set', payload: id });
+    },
+    clearEditingBook() {
+      dispatch({ type: 'editingBook/clear' });
+    },
+    setAddFormStatus() {
+      dispatch({ type: 'form/addStatus' });
+    },
+    setEditFormStatus() {
+      dispatch({ type: 'form/editStatus' });
+    },
     toDashboard() {
       dispatch({ type: 'page/toDashboard' });
     },

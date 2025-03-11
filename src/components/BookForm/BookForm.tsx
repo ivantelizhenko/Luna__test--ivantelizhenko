@@ -1,13 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
+import _ from 'lodash';
 
 import InputField from './InputField';
 import SelectField from './SelectField';
 import BookFormRow from './BookFornRow';
 import Button from '../Button';
 import { useBooks } from '../../store/BookContext';
+import { Book, BookStatus } from '../../store/BookContextType';
 
 const StyledBookForm = styled.form`
   & div:not(:last-of-type) {
@@ -33,17 +35,35 @@ type DataBookFields = {
   title: string;
   author: string;
   category: 'Fiction' | 'Non-Fiction' | 'Science';
-  isbn: '';
+  isbn: string;
 };
 
 function BookForm() {
-  const { addBook, toDashboard } = useBooks();
+  const {
+    addBook,
+    editBook,
+    toDashboard,
+    formStatus,
+    clearEditingBook,
+    editingBook,
+  } = useBooks();
   const [formData, setFormData] = useState<DataBookFields>({
     title: '',
     author: '',
     category: 'Fiction',
     isbn: '',
   });
+
+  useEffect(() => {
+    if (editingBook) {
+      setFormData({
+        title: editingBook.title,
+        author: editingBook.author,
+        category: editingBook.category,
+        isbn: editingBook.isbn.toString(),
+      });
+    }
+  }, [editingBook]);
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -56,13 +76,43 @@ function BookForm() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const time = format(new Date(), 'dd MMMM y, h:mmaaa');
-    const newBook = {
-      ...formData,
-      isbn: +formData.isbn,
-      createdAt: time,
-      id: Math.random().toString(),
-    };
-    addBook(newBook);
+
+    if (formStatus === 'add') {
+      const newBook = {
+        ...formData,
+        isbn: +formData.isbn,
+        createdAt: time,
+        status: BookStatus.Active,
+        id: Math.random().toString(),
+      };
+      addBook(newBook);
+      toast.success('Book was added!');
+    }
+
+    if (formStatus === 'edit') {
+      const newBookWithoutModify = {
+        ...editingBook,
+        ...formData,
+        isbn: +formData.isbn,
+      };
+
+      const newBook = {
+        ...newBookWithoutModify,
+        modifiedAt: time,
+      };
+
+      if (!_.isEqual(editingBook, newBookWithoutModify)) {
+        editBook(newBook as Book);
+        toast.success('Book was edited!');
+      } else {
+        toast('If you want to edit you should something change!', {
+          duration: 4000,
+          icon: '⚠️',
+        });
+      }
+      clearEditingBook();
+    }
+
     toDashboard();
     setFormData({
       title: '',
@@ -70,7 +120,20 @@ function BookForm() {
       category: 'Fiction',
       isbn: '',
     });
-    toast.success('Book was added!');
+  }
+
+  function handleToDashboard() {
+    toDashboard();
+
+    if (formStatus === 'edit') {
+      clearEditingBook();
+      setFormData({
+        title: '',
+        author: '',
+        category: 'Fiction',
+        isbn: '',
+      });
+    }
   }
 
   return (
@@ -111,8 +174,10 @@ function BookForm() {
       </BookFormRow>
 
       <BookFormRow>
-        <Button onClick={toDashboard}>&larr; Dashboard</Button>
-        <Button type="submit">Add book</Button>
+        <Button onClick={handleToDashboard}>&larr; Dashboard</Button>
+        <Button type="submit">
+          {formStatus === 'add' ? 'Add' : 'Edit'} book
+        </Button>
       </BookFormRow>
     </StyledBookForm>
   );
