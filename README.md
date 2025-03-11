@@ -6,6 +6,4 @@
 
 3. npm i
 
-4. npm run server
-
-5. npm run dev
+4. npm run start
