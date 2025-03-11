@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BookForm from './BookForm/BookForm';
 
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import { useBooks } from '../store/BookContext';
 
 const StyledMain = styled.main`

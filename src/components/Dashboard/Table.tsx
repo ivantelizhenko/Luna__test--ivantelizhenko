@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { useBooks } from '../store/BookContext';
+import { useBooks } from '../../store/BookContext';
+import { BookStatus } from '../../store/BookContextType';
+import { toggleBookStatus as toggleBookStatusHelper } from '../../utils/helpers';
 
 const StyledTable = styled.table<{ centering?: boolean }>`
   width: 100%;
@@ -30,10 +32,19 @@ const ActionContainer = styled.td`
 
 const TableButton = styled.button`
   padding: 8px 12px;
+  white-space: nowrap;
+
+  &:last-of-type {
+    width: 100%;
+  }
 `;
 
 function Table() {
-  const { books } = useBooks();
+  const { books, toggleBookStatus } = useBooks();
+
+  function handleToggleStatus(id: string, status: BookStatus) {
+    toggleBookStatus(id, toggleBookStatusHelper(status));
+  }
 
   return (
     <StyledTable>
@@ -50,7 +61,16 @@ function Table() {
       </thead>
       <tbody>
         {books.map(
-          ({ title, author, id, category, isbn, createdAt, modifiedAt }) => (
+          ({
+            title,
+            author,
+            id,
+            category,
+            isbn,
+            createdAt,
+            modifiedAt,
+            status,
+          }) => (
             <tr key={id}>
               <td>{title}</td>
               <td>{author}</td>
@@ -60,8 +80,12 @@ function Table() {
               <td>{modifiedAt || '-'}</td>
               <ActionContainer>
                 <TableButton>Edit</TableButton>
-                <TableButton>Delete</TableButton>
-                <TableButton>Deactivate</TableButton>
+                <TableButton disabled={status === BookStatus.Active}>
+                  Delete
+                </TableButton>
+                <TableButton onClick={() => handleToggleStatus(id, status)}>
+                  {status === BookStatus.Active ? 'Deactivate' : 'Re-Activate'}
+                </TableButton>
               </ActionContainer>
             </tr>
           )

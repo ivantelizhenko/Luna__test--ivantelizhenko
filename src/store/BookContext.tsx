@@ -4,8 +4,15 @@ import {
   BooksContextValue,
   AppState,
   BooksContextProviderProps,
+  Book,
 } from './BookContextType';
-import { addBook as addBookApi, getBooks } from '../services/booksAPI';
+import {
+  addBook as addBookApi,
+  deleteBook,
+  getBooks,
+  updateBookStatus,
+} from '../services/booksAPI';
+import { toggleBookStatus as toggleBookStatusHelper } from '../utils/helpers';
 
 const BooksContext = createContext<BooksContextValue | null>(null);
 
@@ -32,7 +39,21 @@ function booksReducer(state: AppState, action: Action): AppState {
     case 'book/remove': {
       return {
         ...state,
-        books: [...state.books.filter(book => book.isbn !== action.payload)],
+        books: [...state.books.filter(book => book.id !== action.payload)],
+      };
+    }
+    case 'book/toggleStatus': {
+      const editedBooks: Book[] = state.books.map(book =>
+        book.id === action.payload
+          ? {
+              ...book,
+              status: toggleBookStatusHelper(book.status),
+            }
+          : book
+      );
+      return {
+        ...state,
+        books: editedBooks,
       };
     }
 
@@ -67,16 +88,19 @@ function BooksProvider({ children }: BooksContextProviderProps) {
 
   const ctx: BooksContextValue = {
     ...booksState,
-    addBook(newBook) {
+    async addBook(newBook) {
       dispatch({ type: 'book/add', payload: newBook });
-      async function add() {
-        await addBookApi(newBook);
-      }
-      add();
+      await addBookApi(newBook);
     },
-    removeBook(isbn) {
-      dispatch({ type: 'book/remove', payload: isbn });
+    async removeBook(id) {
+      dispatch({ type: 'book/remove', payload: id });
+      await deleteBook(id);
     },
+    async toggleBookStatus(id, newStatus) {
+      dispatch({ type: 'book/toggleStatus', payload: id });
+      await updateBookStatus(id, newStatus);
+    },
+
     toDashboard() {
       dispatch({ type: 'page/toDashboard' });
     },

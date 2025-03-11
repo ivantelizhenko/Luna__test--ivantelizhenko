@@ -8,6 +8,12 @@ export interface Book {
   modifiedAt?: string;
   isbn: number;
   id: string;
+  status: BookStatus;
+}
+
+export enum BookStatus {
+  Deactivated = 'deactivated',
+  Active = 'active',
 }
 
 export type AppState = {
@@ -17,7 +23,8 @@ export type AppState = {
 
 export type BooksContextValue = AppState & {
   addBook: (newBook: Book) => void;
-  removeBook: (isbn: number) => void;
+  removeBook: (id: string) => void;
+  toggleBookStatus: (id: string, newStatus: BookStatus) => void;
   toDashboard: () => void;
   toForm: () => void;
 };
@@ -38,7 +45,11 @@ type addBookAction = {
 
 type removeBookAction = {
   type: 'book/remove';
-  payload: number;
+  payload: string;
+};
+type toggleBookStatusAction = {
+  type: 'book/toggleStatus';
+  payload: string;
 };
 
 type toDashboardAction = {
@@ -52,5 +63,6 @@ export type Action =
   | isBooksLoadedAction
   | addBookAction
   | removeBookAction
+  | toggleBookStatusAction
   | toDashboardAction
   | toFormAction;

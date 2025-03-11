@@ -1,10 +1,10 @@
-import { Book } from '../store/BookContextType';
+import { Book, BookStatus } from '../store/BookContextType';
 import { API_URL } from '../utils/constants';
 
 interface FetchOptions {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   endpoint: string;
-  body?: Book;
+  body?: Book | { status: BookStatus };
 }
 
 async function fetchData({ method, endpoint, body }: FetchOptions) {
@@ -36,7 +36,7 @@ export async function getBooks() {
   }));
 }
 
-export async function addBook(newBook: Book): Promise<Book> {
+export async function addBook(newBook: Book) {
   return await fetchData({
     method: 'POST',
     endpoint: '/books',
@@ -44,17 +44,21 @@ export async function addBook(newBook: Book): Promise<Book> {
   });
 }
 
-export async function deleteBook(itemId: string): Promise<void> {
+export async function deleteBook(itemId: string) {
   await fetchData({ method: 'DELETE', endpoint: `/books/${itemId}` });
 }
 
-export async function updateBook(
-  itemId: string,
-  updatedBook: Book
-): Promise<Book | undefined> {
+export async function updateBook(itemId: string, updatedBook: Book) {
   return await fetchData({
     method: 'PUT',
     endpoint: `/books/${itemId}`,
     body: updatedBook,
+  });
+}
+export async function updateBookStatus(itemId: string, status: BookStatus) {
+  return await fetchData({
+    method: 'PATCH',
+    endpoint: `/books/${itemId}`,
+    body: { status },
   });
 }

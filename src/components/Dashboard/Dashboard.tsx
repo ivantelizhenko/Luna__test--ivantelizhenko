@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Table from './Table';
-import { useBooks } from '../store/BookContext';
+import { useBooks } from '../../store/BookContext';
 
 const StyledDashboard = styled.div`
   background-color: #fefae0;
