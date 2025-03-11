@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { useBooks } from '../../store/BookContext';
-import { BookStatus } from '../../store/BookContextType';
+import { useBooks } from '../../store/BookContext/BooksContext';
+import { Book, BookStatus } from '../../store/BookContext/BooksContextType';
 import { toggleBookStatus as toggleBookStatusHelper } from '../../utils/helpers';
+import { usePage } from '../../store/PageContext/PageContext';
+import { useForm } from '../../store/FormContext/FormContext';
 
 const StyledTable = styled.table<{ centering?: boolean }>`
   width: 100%;
@@ -40,19 +42,14 @@ const TableButton = styled.button`
 `;
 
 function Table() {
-  const {
-    books,
-    toggleBookStatus,
-    removeBook,
-    setEditingBook,
-    setEditFormStatus,
-    toForm,
-  } = useBooks();
+  const { books, toggleBookStatus, removeBook, setEditingBook } = useBooks();
+  const { setPageFormStatus } = usePage();
+  const { setFormEditStatus } = useForm();
 
   function handleEditBook(id: string) {
     setEditingBook(id);
-    setEditFormStatus();
-    toForm();
+    setFormEditStatus();
+    setPageFormStatus();
   }
 
   function handleDeleteBook(id: string) {
@@ -77,7 +74,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {books.map(
+        {(books as Book[]).map(
           ({
             title,
             author,

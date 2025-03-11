@@ -16,24 +16,18 @@ export enum BookStatus {
   Active = 'active',
 }
 
-export type AppState = {
+export type BookState = {
   books: Book[];
-  page: 'dashboard' | 'form';
-  formStatus: 'add' | 'edit';
   editingBook: Book | null;
 };
 
-export type BooksContextValue = AppState & {
+export type BooksContextValue = BookState & {
   addBook: (newBook: Book) => void;
   removeBook: (id: string) => void;
   editBook: (editedBook: Book) => void;
   toggleBookStatus: (id: string, newStatus: BookStatus) => void;
   setEditingBook: (id: string) => void;
   clearEditingBook: () => void;
-  setAddFormStatus: () => void;
-  setEditFormStatus: () => void;
-  toDashboard: () => void;
-  toForm: () => void;
 };
 
 export type BooksContextProviderProps = {
@@ -71,22 +65,6 @@ type editingBookClearAction = {
   type: 'editingBook/clear';
 };
 
-type setFormAdd = {
-  type: 'form/addStatus';
-};
-
-type setFormEdit = {
-  type: 'form/editStatus';
-};
-
-type toDashboardAction = {
-  type: 'page/toDashboard';
-};
-
-type toFormAction = {
-  type: 'page/toForm';
-};
-
 export type Action =
   | isBooksLoadedAction
   | addBookAction
@@ -94,8 +72,4 @@ export type Action =
   | removeBookAction
   | toggleBookStatusAction
   | editingBookSetAction
-  | editingBookClearAction
-  | setFormAdd
-  | setFormEdit
-  | toDashboardAction
-  | toFormAction;
+  | editingBookClearAction;

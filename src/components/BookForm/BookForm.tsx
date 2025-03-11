@@ -8,8 +8,10 @@ import InputField from './InputField';
 import SelectField from './SelectField';
 import BookFormRow from './BookFornRow';
 import Button from '../Button';
-import { useBooks } from '../../store/BookContext';
-import { Book, BookStatus } from '../../store/BookContextType';
+import { useBooks } from '../../store/BookContext/BooksContext';
+import { Book, BookStatus } from '../../store/BookContext/BooksContextType';
+import { usePage } from '../../store/PageContext/PageContext';
+import { useForm } from '../../store/FormContext/FormContext';
 
 const StyledBookForm = styled.form`
   & div:not(:last-of-type) {
@@ -39,14 +41,9 @@ type DataBookFields = {
 };
 
 function BookForm() {
-  const {
-    addBook,
-    editBook,
-    toDashboard,
-    formStatus,
-    clearEditingBook,
-    editingBook,
-  } = useBooks();
+  const { addBook, editBook, clearEditingBook, editingBook } = useBooks();
+  const { setPageDashboardStatus } = usePage();
+  const { formStatus } = useForm();
   const [formData, setFormData] = useState<DataBookFields>({
     title: '',
     author: '',
@@ -113,7 +110,7 @@ function BookForm() {
       clearEditingBook();
     }
 
-    toDashboard();
+    setPageDashboardStatus();
     setFormData({
       title: '',
       author: '',
@@ -123,7 +120,7 @@ function BookForm() {
   }
 
   function handleToDashboard() {
-    toDashboard();
+    setPageDashboardStatus();
 
     if (formStatus === 'edit') {
       clearEditingBook();

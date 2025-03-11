@@ -1,30 +1,30 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
+
 import {
   Action,
   BooksContextValue,
-  AppState,
+  BookState,
   BooksContextProviderProps,
   Book,
-} from './BookContextType';
+} from './BooksContextType';
 import {
   addBook as addBookApi,
   deleteBook,
   getBooks,
   updateBook,
   updateBookStatus,
-} from '../services/booksAPI';
-import { toggleBookStatus as toggleBookStatusHelper } from '../utils/helpers';
+} from '../../services/booksAPI';
+import { toggleBookStatus as toggleBookStatusHelper } from '../../utils/helpers';
 
 const BooksContext = createContext<BooksContextValue | null>(null);
 
-const initialState: AppState = {
+const initialState: BookState = {
   books: [],
-  page: 'dashboard',
   formStatus: 'add',
   editingBook: null,
 };
 
-function booksReducer(state: AppState, action: Action): AppState {
+function booksReducer(state: BookState, action: Action): BookState {
   switch (action.type) {
     case 'books/loaded': {
       return {
@@ -36,7 +36,6 @@ function booksReducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         books: [...state.books, action.payload],
-        page: 'dashboard',
       };
     }
     case 'book/remove': {
@@ -92,14 +91,6 @@ function booksReducer(state: AppState, action: Action): AppState {
         formStatus: 'edit',
       };
     }
-
-    case 'page/toDashboard': {
-      return { ...state, page: 'dashboard' };
-    }
-    case 'page/toForm': {
-      return { ...state, page: 'form' };
-    }
-
     default:
       throw new Error('Unknown action type');
   }
@@ -151,12 +142,6 @@ function BooksProvider({ children }: BooksContextProviderProps) {
     },
     setEditFormStatus() {
       dispatch({ type: 'form/editStatus' });
-    },
-    toDashboard() {
-      dispatch({ type: 'page/toDashboard' });
-    },
-    toForm() {
-      dispatch({ type: 'page/toForm' });
     },
   };
 

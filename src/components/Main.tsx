@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import BookForm from './BookForm/BookForm';
 
 import Dashboard from './Dashboard/Dashboard';
-import { useBooks } from '../store/BookContext';
+import { usePage } from '../store/PageContext/PageContext';
+import { BooksProvider } from '../store/BookContext/BooksContext';
+import { FormProvider } from '../store/FormContext/FormContext';
 
 const StyledMain = styled.main`
   background-color: #d4a373;
@@ -11,12 +13,16 @@ const StyledMain = styled.main`
 `;
 
 function Main() {
-  const { page } = useBooks();
+  const { page } = usePage();
   return (
-    <StyledMain>
-      {page === 'form' && <BookForm />}
-      {page === 'dashboard' && <Dashboard />}
-    </StyledMain>
+    <FormProvider>
+      <BooksProvider>
+        <StyledMain>
+          {page === 'form' && <BookForm />}
+          {page === 'dashboard' && <Dashboard />}
+        </StyledMain>
+      </BooksProvider>
+    </FormProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Book, BookStatus } from '../store/BookContextType';
+import { Book, BookStatus } from '../store/BookContext/BooksContextType';
 import { API_URL } from '../utils/constants';
 
 interface FetchOptions {

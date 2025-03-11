@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { BooksProvider } from './store/BookContext';
+
 import { Toaster } from 'react-hot-toast';
 
 import Footer from './components/Footer';
 import Main from './components/Main';
+import { PageProvider } from './store/PageContext/PageContext';
 
 const Layout = styled.div`
   display: flex;
@@ -13,13 +14,13 @@ const Layout = styled.div`
 
 function App() {
   return (
-    <BooksProvider>
-      <Layout>
+    <Layout>
+      <PageProvider>
         <Main />
-        <Footer />
-        <Toaster />
-      </Layout>
-    </BooksProvider>
+      </PageProvider>
+      <Footer />
+      <Toaster />
+    </Layout>
   );
 }
 
