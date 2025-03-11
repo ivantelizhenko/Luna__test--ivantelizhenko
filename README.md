@@ -2,7 +2,7 @@
 
 1. git clone https://github.com/ivantelizhenko/Luna__test--ivantelizhenko
 
-2. git cd Luna\_\_test--ivantelizhenko
+2. cd Luna\_\_test--ivantelizhenko
 
 3. npm i
 
