@@ -55,30 +55,12 @@
       "status": "deactivated"
     },
     {
-      "id": "0.025823217705060797",
-      "title": "test",
-      "author": "test",
-      "category": "Non-Fiction",
-      "isbn": 3333333,
-      "createdAt": "10 March 2025, 5:37pm",
-      "status": "deactivated"
-    },
-    {
       "id": "0.740400081187306",
       "title": "test",
       "author": "test",
       "category": "Non-Fiction",
       "isbn": 123,
       "createdAt": "10 March 2025, 5:51pm",
-      "status": "deactivated"
-    },
-    {
-      "id": "0.310903738812366",
-      "title": "asddd",
-      "author": "asdd",
-      "category": "Fiction",
-      "isbn": 222,
-      "createdAt": "11 March 2025, 8:52am",
       "status": "deactivated"
     }
   ]
